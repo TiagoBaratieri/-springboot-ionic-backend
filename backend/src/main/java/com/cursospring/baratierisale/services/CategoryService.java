@@ -1,0 +1,21 @@
+package com.cursospring.baratierisale.services;
+
+import com.cursospring.baratierisale.entities.Category;
+import com.cursospring.baratierisale.repositories.CategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class CategoryService {
+
+    @Autowired
+    public CategoryRepository repo;
+
+    public Category find(Integer id) {
+        Optional<Category> obj = repo.findById(id);
+        return obj.orElse(null);
+
+    }
+}
