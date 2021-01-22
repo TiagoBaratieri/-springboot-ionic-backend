@@ -18,19 +18,19 @@ public class BaratierisaleApplication  implements CommandLineRunner {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    CityRepository cityRepository;
+    private CityRepository cityRepository;
 
     @Autowired
-    StateRepository stateRepository;
+    private StateRepository stateRepository;
 
     @Autowired
-    ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
     @Autowired
-    AddressRepository addressRepository;
+    private AddressRepository addressRepository;
 
 
 
@@ -49,6 +49,9 @@ public class BaratierisaleApplication  implements CommandLineRunner {
         Product p1 = new Product(null, "Computador", 2000.00);
         Product p2 = new Product(null, "Inpressora", 800.00);
         Product p3 = new Product(null, "Mouse", 80.00);
+
+        cat1.getProducts().addAll(Arrays.asList(p1, p2, p3));
+        cat2.getProducts().addAll(Arrays.asList(p2));
 
         p1.getCategories().addAll(Arrays.asList(cat1));
         p2.getCategories().addAll(Arrays.asList(cat1, cat2));
@@ -71,11 +74,14 @@ public class BaratierisaleApplication  implements CommandLineRunner {
 
         Client cli1 = new Client(null, "Tiago Baratieri", "tiagobaratieri97@gmail.com", "062843366965",
                 ClientType.PHYSICALPERSON);
+
         cli1.getTelephones().addAll(Arrays.asList("322152541", "2545256"));
 
         Address e1 = new Address(null, "Valdecir sordy", "565A", "casa",
                 "Jardim Aaurora", "2325545", cli1, c1);
         Address e2 = new Address(null, "Rua Ouro Verde", "233", "São Silvestre", "casa", "85412214", cli1, c2);
+
+        cli1.getAddresses().addAll(Arrays.asList(e1,e2));
 
         clientRepository.saveAll(Arrays.asList(cli1));
         addressRepository.saveAll(Arrays.asList(e1,e2));
