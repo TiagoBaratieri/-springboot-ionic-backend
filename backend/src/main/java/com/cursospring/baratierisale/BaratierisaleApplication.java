@@ -1,19 +1,15 @@
 package com.cursospring.baratierisale;
 
-import com.cursospring.baratierisale.entities.Category;
-import com.cursospring.baratierisale.entities.City;
-import com.cursospring.baratierisale.entities.Product;
-import com.cursospring.baratierisale.entities.State;
-import com.cursospring.baratierisale.repositories.CategoryRepository;
-import com.cursospring.baratierisale.repositories.CityRepository;
-import com.cursospring.baratierisale.repositories.ProductRepository;
-import com.cursospring.baratierisale.repositories.StateRepository;
+import com.cursospring.baratierisale.entities.*;
+import com.cursospring.baratierisale.entities.enumS.ClientType;
+import com.cursospring.baratierisale.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class BaratierisaleApplication  implements CommandLineRunner {
@@ -29,6 +25,13 @@ public class BaratierisaleApplication  implements CommandLineRunner {
 
     @Autowired
     StateRepository stateRepository;
+
+    @Autowired
+    ClientRepository clientRepository;
+
+    @Autowired
+    AddressRepository addressRepository;
+
 
 
     public static void main(String[] args) {
@@ -66,8 +69,16 @@ public class BaratierisaleApplication  implements CommandLineRunner {
         stateRepository.saveAll(Arrays.asList(est1,est2));
         cityRepository.saveAll(Arrays.asList(c1,c2,c3));
 
-        
+        Client cli1 = new Client(null, "Tiago Baratieri", "tiagobaratieri97@gmail.com", "062843366965",
+                ClientType.PHYSICALPERSON);
+        cli1.getTelephones().addAll(Arrays.asList("322152541", "2545256"));
 
+        Address e1 = new Address(null, "Valdecir sordy", "565A", "casa",
+                "Jardim Aaurora", "2325545", cli1, c1);
+        Address e2 = new Address(null, "Rua Ouro Verde", "233", "São Silvestre", "casa", "85412214", cli1, c2);
+
+        clientRepository.saveAll(Arrays.asList(cli1));
+        addressRepository.saveAll(Arrays.asList(e1,e2));
 
 
     }
