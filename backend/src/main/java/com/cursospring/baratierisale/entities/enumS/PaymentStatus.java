@@ -1,15 +1,17 @@
 package com.cursospring.baratierisale.entities.enumS;
 
-public enum ClientType {
-    PHYSICALPERSON(1,"Pessoa Fisica"),
-    LEGALPERSON(2,"Pessoa Juridica");
+public enum PaymentStatus {
+
+    PENDING(1,"Pendente"),
+    PAID (3,"Quitado"),
+    CANCELED(2,"Cancelado");
 
     private int cod;
     private String description;
 
-    private ClientType(int cod, String description ){
+    PaymentStatus(int cod, String description) {
         this.cod = cod;
-        this.description =description;
+        this.description = description;
     }
 
     public int getCod() {
@@ -20,11 +22,11 @@ public enum ClientType {
         return description;
     }
 
-    public static ClientType toEnum(Integer cod){
+    public static PaymentStatus toEnum(Integer cod){
         if(cod == null){
             return null;
         }
-        for(ClientType x : ClientType.values()){
+        for(PaymentStatus x : PaymentStatus.values()){
             if(cod.equals(x.getCod())){
                 return x;
             }
@@ -32,5 +34,5 @@ public enum ClientType {
         throw new IllegalArgumentException("Id invalido" + cod);
     }
 
-}
 
+}

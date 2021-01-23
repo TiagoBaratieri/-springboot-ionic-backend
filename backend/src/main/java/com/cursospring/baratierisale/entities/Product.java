@@ -1,5 +1,6 @@
 package com.cursospring.baratierisale.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -19,9 +20,9 @@ public class Product implements Serializable {
     private String name;
     private Double price;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany
-    @JoinTable(name = "PRODUTO_CATEGORIES",joinColumns = @JoinColumn(name = "product_id"),
+    @JoinTable(name = "PRODUCT_CATEGORIES",joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "categories_id"))
     private List<Category> categories = new ArrayList<>();
 

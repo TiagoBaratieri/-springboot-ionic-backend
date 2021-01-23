@@ -1,8 +1,6 @@
 package com.cursospring.baratierisale.services;
 
-import com.cursospring.baratierisale.entities.Category;
 import com.cursospring.baratierisale.entities.Client;
-import com.cursospring.baratierisale.repositories.CategoryRepository;
 import com.cursospring.baratierisale.repositories.ClientRepository;
 import com.cursospring.baratierisale.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

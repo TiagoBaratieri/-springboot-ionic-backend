@@ -1,6 +1,7 @@
 package com.cursospring.baratierisale.entities;
 
 import com.cursospring.baratierisale.entities.enumS.ClientType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,12 +19,17 @@ public class Client implements Serializable {
     private String cpfOuCnpj;
     private Integer type;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(name = "telephone")
     private Set<String> telephones = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "client")
+    private List<Solicitation> orders = new ArrayList<>();
 
     public Client(){
 
@@ -69,24 +75,12 @@ public class Client implements Serializable {
         this.cpfOuCnpj = cpfOuCnpj;
     }
 
-    public Integer getTipo() {
+    public Integer getType() {
         return type;
     }
 
-    public void setTipo(Integer tipo) {
-        this.type = tipo;
-    }
-
-    public ClientType getType() {
-        return ClientType.toEnum(type);
-    }
-
-    public void setType(ClientType type) {
-        this.type = type.getCod();
-    }
-
-    public Set<String> getTelephones() {
-        return telephones;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public List<Address> getAddresses() {
@@ -97,8 +91,20 @@ public class Client implements Serializable {
         this.addresses = addresses;
     }
 
+    public Set<String> getTelephones() {
+        return telephones;
+    }
+
     public void setTelephones(Set<String> telephones) {
         this.telephones = telephones;
+    }
+
+    public List<Solicitation> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Solicitation> orders) {
+        this.orders = orders;
     }
 
     @Override
@@ -113,4 +119,6 @@ public class Client implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }

@@ -2,14 +2,15 @@ package com.cursospring.baratierisale;
 
 import com.cursospring.baratierisale.entities.*;
 import com.cursospring.baratierisale.entities.enumS.ClientType;
+import com.cursospring.baratierisale.entities.enumS.PaymentStatus;
 import com.cursospring.baratierisale.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class BaratierisaleApplication  implements CommandLineRunner {
@@ -31,6 +32,12 @@ public class BaratierisaleApplication  implements CommandLineRunner {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private SolicitationRepository solicitationRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
 
 
 
@@ -85,6 +92,23 @@ public class BaratierisaleApplication  implements CommandLineRunner {
 
         clientRepository.saveAll(Arrays.asList(cli1));
         addressRepository.saveAll(Arrays.asList(e1,e2));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        Solicitation ped1 = new Solicitation(null,sdf.parse("10/01/2021 20:30"),cli1,e1);
+        Solicitation ped2 = new Solicitation(null, sdf.parse("20/02/2020 19:35"), cli1, e2);
+
+        Payment pagto1 = new CardPayment(null, PaymentStatus.PAID, ped1, 6);
+        ped1.setPayment(pagto1);
+
+        Payment pagto2 = new PaymentBoleto(null, PaymentStatus.PENDING, ped2, sdf.parse("20/10/2017 00:00"), null);
+        ped2.setPayment(pagto2);
+
+        cli1.getOrders().addAll(Arrays.asList(ped1, ped2));
+
+        solicitationRepository.saveAll(Arrays.asList(ped1,ped2));
+        paymentRepository.saveAll(Arrays.asList(pagto1,pagto2));
+
 
 
     }

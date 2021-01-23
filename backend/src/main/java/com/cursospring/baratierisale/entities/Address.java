@@ -1,10 +1,10 @@
 package com.cursospring.baratierisale.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Objects;
 
 @Entity
 public class Address implements Serializable {
@@ -19,7 +19,8 @@ public class Address implements Serializable {
     private String district;
     private String cep;
 
-    @JsonIgnore
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
