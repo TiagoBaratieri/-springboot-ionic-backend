@@ -1,5 +1,7 @@
 package com.cursospring.baratierisale.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class SolicitationItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId
     private SolicitationItemPK id = new SolicitationItemPK();
 
@@ -28,6 +31,7 @@ public class SolicitationItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Solicitation getSolicitation(){
         return id.getSolicitation();
     }

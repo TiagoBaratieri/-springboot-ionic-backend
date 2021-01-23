@@ -104,7 +104,7 @@ public class BaratierisaleApplication  implements CommandLineRunner {
         Payment pagto1 = new CardPayment(null, PaymentStatus.PAID, ped1, 6);
         ped1.setPayment(pagto1);
 
-        Payment pagto2 = new PaymentBoleto(null, PaymentStatus.PENDING, ped2, sdf.parse("20/10/2017 00:00"), null);
+        Payment pagto2 = new PaymentBoleto(null, PaymentStatus.PENDING, ped2, sdf.parse("20/10/2021 00:00"), null);
         ped2.setPayment(pagto2);
 
         cli1.getOrders().addAll(Arrays.asList(ped1, ped2));

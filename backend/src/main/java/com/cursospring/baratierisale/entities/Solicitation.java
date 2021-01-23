@@ -1,5 +1,7 @@
 package com.cursospring.baratierisale.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +16,8 @@ public class Solicitation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date instante;
 
 
@@ -40,17 +44,6 @@ public class Solicitation implements Serializable {
         this.instante = instante;
         this.client = client;
         this.deliveryAddress = deliveryAddress;
-    }
-
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Solicitation order = (Solicitation) o;
-        return id.equals(order.id);
     }
 
     public Integer getId() {
@@ -99,6 +92,15 @@ public class Solicitation implements Serializable {
 
     public void setItems(Set<SolicitationItem> items) {
         this.items = items;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Solicitation order = (Solicitation) o;
+        return id.equals(order.id);
     }
 
     @Override

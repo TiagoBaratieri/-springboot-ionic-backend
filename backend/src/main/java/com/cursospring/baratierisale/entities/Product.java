@@ -23,9 +23,11 @@ public class Product implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categories_id"))
     private List<Category> categories = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
     private Set<SolicitationItem> items = new HashSet<>();
 
+    @JsonIgnore
     private List<Solicitation> getOrder(){
         List<Solicitation> list = new ArrayList<>();
         for(SolicitationItem x : items){
