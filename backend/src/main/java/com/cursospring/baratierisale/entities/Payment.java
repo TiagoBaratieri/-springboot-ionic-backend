@@ -1,6 +1,7 @@
 package com.cursospring.baratierisale.entities;
 
 import com.cursospring.baratierisale.entities.enumS.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public abstract class Payment implements Serializable {
     private Integer id;
     private Integer state;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "solicitation_id")
     @MapsId

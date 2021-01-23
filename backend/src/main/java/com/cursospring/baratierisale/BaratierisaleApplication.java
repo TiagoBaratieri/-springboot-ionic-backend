@@ -39,6 +39,9 @@ public class BaratierisaleApplication  implements CommandLineRunner {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Autowired
+    private SolicitationItemRepository solicitationItem;
+
 
 
     public static void main(String[] args) {
@@ -108,6 +111,19 @@ public class BaratierisaleApplication  implements CommandLineRunner {
 
         solicitationRepository.saveAll(Arrays.asList(ped1,ped2));
         paymentRepository.saveAll(Arrays.asList(pagto1,pagto2));
+
+        SolicitationItem ip1 = new SolicitationItem(ped1, p1, 0.00, 1, 2000.00);
+        SolicitationItem ip2 = new SolicitationItem(ped1, p3, 0.00, 2, 80.00);
+        SolicitationItem ip3 = new SolicitationItem(ped2, p2, 100.00, 1, 800.00);
+
+        ped1.getItems().addAll(Arrays.asList(ip1, ip2));
+        ped2.getItems().addAll(Arrays.asList(ip3));
+
+        p1.getItems().addAll(Arrays.asList(ip1));
+        p2.getItems().addAll(Arrays.asList(ip3));
+        p3.getItems().addAll(Arrays.asList(ip2));
+
+        solicitationItem.saveAll(Arrays.asList(ip1, ip2, ip3));
 
 
 

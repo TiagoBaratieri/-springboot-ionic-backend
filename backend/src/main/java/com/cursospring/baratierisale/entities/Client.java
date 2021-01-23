@@ -1,7 +1,7 @@
 package com.cursospring.baratierisale.entities;
 
 import com.cursospring.baratierisale.entities.enumS.ClientType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +19,6 @@ public class Client implements Serializable {
     private String cpfOuCnpj;
     private Integer type;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
 
@@ -27,7 +26,7 @@ public class Client implements Serializable {
     @CollectionTable(name = "telephone")
     private Set<String> telephones = new HashSet<>();
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Solicitation> orders = new ArrayList<>();
 

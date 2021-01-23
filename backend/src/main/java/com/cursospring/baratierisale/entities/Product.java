@@ -1,13 +1,10 @@
 package com.cursospring.baratierisale.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Product implements Serializable {
@@ -20,11 +17,22 @@ public class Product implements Serializable {
     private String name;
     private Double price;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUCT_CATEGORIES",joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "categories_id"))
     private List<Category> categories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<SolicitationItem> items = new HashSet<>();
+
+    private List<Solicitation> getOrder(){
+        List<Solicitation> list = new ArrayList<>();
+        for(SolicitationItem x : items){
+            list.add(x.getSolicitation());
+        }
+        return list;
+    }
 
     public Product(){
 
@@ -66,6 +74,14 @@ public class Product implements Serializable {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public Set<SolicitationItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<SolicitationItem> items) {
+        this.items = items;
     }
 
     @Override

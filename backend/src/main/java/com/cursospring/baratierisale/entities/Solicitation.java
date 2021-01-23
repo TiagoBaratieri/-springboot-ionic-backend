@@ -3,7 +3,9 @@ package com.cursospring.baratierisale.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Solicitation implements Serializable {
@@ -13,6 +15,7 @@ public class Solicitation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date instante;
+
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Payment payment;
@@ -25,6 +28,8 @@ public class Solicitation implements Serializable {
     @JoinColumn(name = "deliveryAddress_id")
     private Address deliveryAddress;
 
+    @OneToMany(mappedBy = "id.solicitation")
+    private Set<SolicitationItem> items = new HashSet<>();
 
     public Solicitation(){
 
@@ -86,6 +91,14 @@ public class Solicitation implements Serializable {
 
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public Set<SolicitationItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<SolicitationItem> items) {
+        this.items = items;
     }
 
     @Override
