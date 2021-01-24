@@ -1,5 +1,6 @@
 package com.cursospring.baratierisale.services;
 
+import com.cursospring.baratierisale.dto.CategoryDTO;
 import com.cursospring.baratierisale.entities.Category;
 import com.cursospring.baratierisale.repositories.CategoryRepository;
 import com.cursospring.baratierisale.services.exceptions.DataIntegrityException;
@@ -53,5 +54,10 @@ public class CategoryService {
     public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Category fromDto(CategoryDTO objDto){
+        return new Category(objDto.getId(),objDto.getName());
+
     }
 }
