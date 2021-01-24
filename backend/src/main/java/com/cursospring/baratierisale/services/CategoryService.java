@@ -2,8 +2,10 @@ package com.cursospring.baratierisale.services;
 
 import com.cursospring.baratierisale.entities.Category;
 import com.cursospring.baratierisale.repositories.CategoryRepository;
+import com.cursospring.baratierisale.services.exceptions.DataIntegrityException;
 import com.cursospring.baratierisale.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -29,5 +31,14 @@ public class CategoryService {
     public Category update(Category obj) {
         find(obj.getId());
         return repo.save(obj);
+    }
+
+    public void delete(Integer id){
+        find(id);
+        try{
+            repo.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("It is not possible to exclude a category that does not contain products");
+        }
     }
 }

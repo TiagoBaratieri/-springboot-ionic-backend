@@ -1,5 +1,6 @@
 package com.cursospring.baratierisale.resources.exception;
 
+import com.cursospring.baratierisale.services.exceptions.DataIntegrityException;
 import com.cursospring.baratierisale.services.exceptions.ObjectNotFoundException;
 import com.cursospring.baratierisale.services.exceptions.StandarError;
 import org.springframework.http.HttpStatus;
@@ -18,5 +19,13 @@ public class ResourcesExceptionHandler {
         StandarError err = new StandarError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
+
+    @ExceptionHandler(DataIntegrityException.class)
+    public ResponseEntity<StandarError> DataIntegrity(DataIntegrityException e, HttpServletRequest request){
+
+        StandarError err = new StandarError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
 
 }
