@@ -17,7 +17,7 @@ public class SolicitationResource {
     private SolicitationService services;
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
+    public ResponseEntity<Solicitation> find(@PathVariable Integer id) {
         Solicitation obj = services.find(id);
         return ResponseEntity.ok().body(obj);
     }
