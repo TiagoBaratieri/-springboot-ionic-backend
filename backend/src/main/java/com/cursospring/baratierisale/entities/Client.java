@@ -34,12 +34,12 @@ public class Client implements Serializable {
 
     }
 
-    public Client(Integer id, String name, String email, String cpfOuCnpj, ClientType tipo) {
+    public Client(Integer id, String name, String email, String cpfOuCnpj, ClientType type) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.type= tipo.getCod();
+        this.type= (type==null) ? null : type.getCod();
     }
 
     public Integer getId() {
