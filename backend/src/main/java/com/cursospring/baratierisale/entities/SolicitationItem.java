@@ -31,6 +31,10 @@ public class SolicitationItem implements Serializable {
         this.price = price;
     }
 
+    public double getTotalSub(){
+        return (price - discount) * amount;
+    }
+
     @JsonIgnore
     public Solicitation getSolicitation(){
         return id.getSolicitation();

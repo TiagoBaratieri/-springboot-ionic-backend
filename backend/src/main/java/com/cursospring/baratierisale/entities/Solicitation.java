@@ -46,6 +46,14 @@ public class Solicitation implements Serializable {
         this.deliveryAddress = deliveryAddress;
     }
 
+    public double getValueTotal(){
+        double sum = 0.0;
+        for(SolicitationItem ip : items){
+            sum = sum + ip.getTotalSub();
+        }
+        return sum;
+    }
+
     public Integer getId() {
         return id;
     }
