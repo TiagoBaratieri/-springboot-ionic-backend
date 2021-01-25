@@ -1,12 +1,14 @@
 package com.cursospring.baratierisale.dto;
 
 import com.cursospring.baratierisale.entities.Client;
+import com.cursospring.baratierisale.services.validation.UpdateClient;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@UpdateClient
 public class ClientDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
