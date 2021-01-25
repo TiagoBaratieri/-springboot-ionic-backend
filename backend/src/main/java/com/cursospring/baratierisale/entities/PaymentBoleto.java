@@ -2,11 +2,13 @@ package com.cursospring.baratierisale.entities;
 
 import com.cursospring.baratierisale.entities.enumS.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
+@JsonTypeName("paymentBoleto")
 public class PaymentBoleto extends Payment {
     private static final long serialVersionUID = 1L;
 

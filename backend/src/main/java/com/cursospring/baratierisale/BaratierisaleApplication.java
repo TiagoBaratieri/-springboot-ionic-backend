@@ -95,10 +95,10 @@ public class BaratierisaleApplication  implements CommandLineRunner {
         categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11));
 
-        State est1 = new State(null, "Minas gerais");
+        State est1 = new State(null, "Paraná");
         State est2 = new State(null, "São Paulo");
 
-        City c1 = new City(null, "Uberlãdia", est1);
+        City c1 = new City(null, "Maringá", est1);
         City c2 = new City(null, "São Paulo", est2);
         City c3 = new City(null, "Campinas", est2);
 
@@ -115,7 +115,8 @@ public class BaratierisaleApplication  implements CommandLineRunner {
 
         Address e1 = new Address(null, "Valdecir sordy", "565A", "casa",
                 "Jardim Aaurora", "2325545", cli1, c1);
-        Address e2 = new Address(null, "Rua Ouro Verde", "233", "São Silvestre", "casa", "85412214", cli1, c2);
+        Address e2 = new Address(null, "Maria Joséfa de Araujo", "233", "Condominio Recanto da Serra", "Jardim São Clemente",
+                "85412214", cli1, c2);
 
         cli1.getAddresses().addAll(Arrays.asList(e1,e2));
 

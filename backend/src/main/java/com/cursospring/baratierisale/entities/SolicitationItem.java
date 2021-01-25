@@ -40,8 +40,16 @@ public class SolicitationItem implements Serializable {
         return id.getSolicitation();
     }
 
+    public void setSolicitation(Solicitation order){
+        id.setSolicitation(order);
+    }
+
     public Product getProduct(){
         return id.getProduct();
+    }
+
+    public void setProduct(Product product){
+        id.setProduct(product);
     }
 
     public SolicitationItemPK getId() {
