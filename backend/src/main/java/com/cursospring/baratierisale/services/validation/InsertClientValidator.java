@@ -1,6 +1,7 @@
 package com.cursospring.baratierisale.services.validation;
 
 import com.cursospring.baratierisale.dto.ClientNewDTO;
+import com.cursospring.baratierisale.entities.Client;
 import com.cursospring.baratierisale.entities.enumS.ClientType;
 import com.cursospring.baratierisale.repositories.ClientRepository;
 import com.cursospring.baratierisale.services.exceptions.FieldMessage;
@@ -14,6 +15,8 @@ import java.util.List;
 
 public class InsertClientValidator implements ConstraintValidator<InsertClient, ClientNewDTO> {
 
+    @Autowired
+    ClientRepository repo;
 
     public void initialize(InsertClient ann) {
     }
@@ -28,6 +31,11 @@ public class InsertClientValidator implements ConstraintValidator<InsertClient, 
 
         if(objDto.getType().equals(ClientType.LEGALPERSON.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())){
             list.add(new FieldMessage("cpfOuCnpj","Invalid legal person"));
+        }
+
+        Client aux = repo.findByEmail(objDto.getEmail());
+        if(aux != null){
+            list.add(new FieldMessage("email","Existing email"));
         }
 
         for (FieldMessage e : list) {
