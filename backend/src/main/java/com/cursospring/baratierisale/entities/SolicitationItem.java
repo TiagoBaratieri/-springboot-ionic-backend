@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.text.*;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -95,5 +97,21 @@ public class SolicitationItem implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        StringBuilder builder = new StringBuilder();
+        builder.append( getProduct().getName());
+        builder.append(",Qte: ");
+        builder.append(getAmount());
+        builder.append(", Preço unitário: ");
+        builder.append(nf.format(getPrice()));
+        builder.append(", Subtotal:");
+        builder.append(nf.format(getTotalSub()));
+        builder.append("\n");
+        return builder.toString();
     }
 }

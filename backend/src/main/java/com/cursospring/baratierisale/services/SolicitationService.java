@@ -4,6 +4,7 @@ import com.cursospring.baratierisale.entities.PaymentBoleto;
 import com.cursospring.baratierisale.entities.Solicitation;
 import com.cursospring.baratierisale.entities.SolicitationItem;
 import com.cursospring.baratierisale.entities.enumS.PaymentStatus;
+import com.cursospring.baratierisale.repositories.ClientRepository;
 import com.cursospring.baratierisale.repositories.PaymentRepository;
 import com.cursospring.baratierisale.repositories.SolicitationItemRepository;
 import com.cursospring.baratierisale.repositories.SolicitationRepository;
@@ -28,6 +29,8 @@ public class SolicitationService {
     private ProductService productService;
     @Autowired
     private SolicitationItemRepository solicitationItemRepository;
+    @Autowired
+  private ClientService clientService;
 
 
     public Solicitation find(Integer id) {
@@ -41,6 +44,7 @@ public class SolicitationService {
     public Solicitation insert(Solicitation obj) {
         obj.setId(null);
         obj.setInstante(new Date());
+        obj.setClient(clientService.find(obj.getClient().getId()));
         obj.getPayment().setState(PaymentStatus.PENDING);
         obj.getPayment().setOrder(obj);
         if (obj.getPayment() instanceof PaymentBoleto) {
@@ -51,10 +55,12 @@ public class SolicitationService {
         paymentRepository.save(obj.getPayment());
         for (SolicitationItem ip : obj.getItems()) {
             ip.setDiscount(0.0);
-            ip.setPrice(productService.find(ip.getProduct().getId()).getPrice());
+            ip.setProduct(productService.find(ip.getProduct().getId()));
+            ip.setPrice(ip.getProduct().getPrice());
             ip.setSolicitation(obj);
         }
         solicitationItemRepository.saveAll(obj.getItems());
+        System.out.println(obj);
         return obj;
     }
 }

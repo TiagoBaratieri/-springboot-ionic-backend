@@ -14,6 +14,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+//api rest: disponibiliza os recursos para entidades
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource {

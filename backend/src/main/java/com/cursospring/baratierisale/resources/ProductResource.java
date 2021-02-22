@@ -2,10 +2,8 @@ package com.cursospring.baratierisale.resources;
 
 import com.cursospring.baratierisale.dto.ProductDTO;
 import com.cursospring.baratierisale.entities.Product;
-import com.cursospring.baratierisale.entities.Solicitation;
 import com.cursospring.baratierisale.resources.util.URL;
 import com.cursospring.baratierisale.services.ProductService;
-import com.cursospring.baratierisale.services.SolicitationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/product")
+@RequestMapping(value = "/products")
 public class ProductResource {
 
     @Autowired
