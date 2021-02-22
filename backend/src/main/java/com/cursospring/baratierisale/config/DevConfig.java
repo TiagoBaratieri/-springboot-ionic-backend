@@ -1,6 +1,8 @@
 package com.cursospring.baratierisale.config;
 
 import com.cursospring.baratierisale.services.DBService;
+import com.cursospring.baratierisale.services.EmailService;
+import com.cursospring.baratierisale.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,11 @@ public class DevConfig {
 
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 
 
