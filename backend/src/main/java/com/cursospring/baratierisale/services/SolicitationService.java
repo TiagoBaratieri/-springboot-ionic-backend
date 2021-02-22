@@ -30,7 +30,9 @@ public class SolicitationService {
     @Autowired
     private SolicitationItemRepository solicitationItemRepository;
     @Autowired
-  private ClientService clientService;
+    private ClientService clientService;
+    @Autowired
+    private EmailService emailService;
 
 
     public Solicitation find(Integer id) {
@@ -60,7 +62,7 @@ public class SolicitationService {
             ip.setSolicitation(obj);
         }
         solicitationItemRepository.saveAll(obj.getItems());
-        System.out.println(obj);
+        emailService.sendOrderConfimationEmail(obj);
         return obj;
     }
 }
